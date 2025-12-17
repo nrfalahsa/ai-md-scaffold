@@ -34,6 +34,8 @@ def main():
         description="Generate project files from AI-generated Markdown"
     )
     parser.add_argument("markdown", nargs="+", help="Markdown file(s)")
+    parser.add_argument("--format", type=int, choices=[1, 2], default=1, 
+                        help="Markdown format: 1=Bold Title (**file**), 2=Header Title (### file)")
     parser.add_argument("--dry-run", action="store_true", help="Preview without writing files")
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing files")
     parser.add_argument("--no-interactive", action="store_true", help="Disable prompts")
@@ -46,10 +48,11 @@ def main():
     for md in args.markdown:
         combined += Path(md).read_text(encoding="utf-8") + "\n"
 
-    files = parse_markdown(combined)
+    # Pass the selected format to the parser
+    files = parse_markdown(combined, fmt=args.format)
 
     if not files:
-        print("[ERROR] No files detected")
+        print(f"[ERROR] No files detected (using Format {args.format})")
         return
 
     root = detect_root(combined)

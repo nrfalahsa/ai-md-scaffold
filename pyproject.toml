@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ai-md-scaffold"
-version = "1.0.1"
+version = "1.2.0"
 description = "Turn AI-generated Markdown into real project files"
 readme = "README.md"
 license = { text = "MIT" }
