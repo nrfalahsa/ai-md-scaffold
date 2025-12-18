@@ -42,7 +42,7 @@ def parse_json(json_text: str):
             content = f.get("content", "")
             if path:
                 files.append((path, content))
-        return files, data.get("root_dir") or data.get("project_name")
+        return files, data.get("project_name")
     except json.JSONDecodeError:
         return [], None
 
